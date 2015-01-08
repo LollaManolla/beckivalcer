@@ -1,5 +1,3 @@
-$font-roboto:"Roboto Condensed", sans-serif;
-
 body {
   background: $body-bg;
   margin: 0;
@@ -7,7 +5,63 @@ body {
   font-family: $font-roboto;
 }
 
-section {
-  border: solid 1px #ededed;
-  margin: 0 50px;
+//header
+#home {
+    background:url("../images/beckibal.jpg") no-repeat scroll top center / 100% auto transparent;
+}
+header {
+  .contain-to-grid {
+    box-shadow: 0px 0px 0px 1px rgba(255,255,255,0.13); 
+    padding: 40px 0;
+  }
+  .top-bar-section {
+    top: rem-calc(38);
+    ul li {
+      margin: rem-calc(0 4);
+      >a {
+        letter-spacing: rem-calc(1.5);
+      }
+      &:hover {
+        border-bottom: solid 3px $red;
+      }
+    }
+  }
+
+  .top-bar-section li.active {   border-bottom: solid 3px $red;}
+}
+
+//section intro
+.intro {
+  @include grid-row();
+  text-align: center !important;
+  h1, h2 {
+    text-transform: uppercase;
+    color: $white;
+  }
+
+}
+
+//media
+@media #{$small-only} {
+  header {
+    .logo {
+      img {
+        max-width: 36%;
+      }
+    }
+    .top-bar-section li.active {   border-bottom: none;background-color:scale-color($red, $lightness: 5%);}
+    .top-bar-section {
+    top:0;
+    ul {
+      background-color: red;
+      > li {
+        margin: 0;
+        &:hover {
+          border-bottom: none;
+          background-color:scale-color($red, $lightness: 5%);
+        }
+      }
+    }
+  }
+  }
 }
