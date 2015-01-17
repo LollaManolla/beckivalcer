@@ -74,6 +74,7 @@ $(document).ready(function(){"use strict";
 
 
 //owl gallery
+//owl gallery
 $(document).ready(function() {
   /* First */
   var owl = $(".about-gallery");
@@ -100,12 +101,15 @@ autoPlay: true
 //about panel slide
 jQuery(function( $ ){
   var container = $( ".open-about-panel" );
-  $( ".open-about").click(
+  $( ".open-about, .close-about").click(
     function( event ){
       event.preventDefault();
       if (container.is( ":visible" )){
-        container.slideUp( 1000 );
+        container.slideUp( 1000, function(){
+          $('html, body').animate({scrollTop:$('.open-about').offset().top-150}, {duration:800, queue:false});
+        });
         $(this).removeClass("active");
+        $(".open-about").removeClass("active");
       } else {
         container.slideDown( 1000);
         $(this).addClass("active");
@@ -113,129 +117,17 @@ jQuery(function( $ ){
     }
     );
 });
-
-jQuery(function( $ ){
-  var container = $( ".open-about-panel" );
-  $( ".close-about").click(
-    function( event ){
-      event.preventDefault();
-      if (container.is( ":visible" )){
-        container.slideUp( 1000 );
-        $(".open-about").removeClass("active");
-      } else {
-        container.slideDown( 1000 );
-      }
-    }
-    );
-})
-
-
-// When the DOM is ready, initialize the scripts.
-jQuery(function( $ ){
-// Get a reference to the container.
-var container = $( ".open-artist1-panel" );
-// Bind the link to toggle the slide.
-$( ".open-artist1" ).click(
-  function( event ){
-// Prevent the default event.
-event.preventDefault();
-// Toggle the slide based on its current
-// visibility.
-if (container.is( ":visible" )){
-// Hide - slide up.
-container.slideUp( 1000 );
-} else {
-// Show - slide down.
-container.slideDown( 1000 );
-}
-}
-);
-});
-
-//open artists
-jQuery(function( $ ){
-  var container = $( ".open-artist2-panel" );
-  $( ".open-artist2" ).click(
-    function( event ){
-      event.preventDefault();
-      if (container.is( ":visible" )){
-        container.slideUp( 1000 );
-      } else {
-        container.slideDown( 1000 );
-      }
-    }
-    );
-});
-
-//open artists
-jQuery(function( $ ){
-  var container = $( ".open-artist3-panel" );
-  $( ".open-artist3" ).click(
-    function( event ){
-      event.preventDefault();
-      if (container.is( ":visible" )){
-        container.slideUp( 1000 );
-      } else {
-        container.slideDown( 1000 );
-      }
-    }
-    );
-});
-
-//open artists
-jQuery(function( $ ){
-  var container = $( ".open-artist4-panel" );
-  $( ".open-artist4" ).click(
-    function( event ){
-      event.preventDefault();
-      if (container.is( ":visible" )){
-        container.slideUp( 1000 );
-      } else {
-        container.slideDown( 1000 );
-      }
-    }
-    );
-});
-
-//open artists
-jQuery(function( $ ){
-  var container = $( ".open-artist5-panel" );
-  $( ".open-artist5" ).click(
-    function( event ){
-      event.preventDefault();
-      if (container.is( ":visible" )){
-        container.slideUp( 1000 );
-      } else {
-        container.slideDown( 1000 );
-      }
-    }
-    );
-});
-
-//open artists
-jQuery(function( $ ){
-  var container = $( ".open-artist6-panel" );
-  $( ".open-artist6" ).click(
-    function( event ){
-      event.preventDefault();
-      if (container.is( ":visible" )){
-        container.slideUp( 1000 );
-      } else {
-        container.slideDown( 1000 );
-      }
-    }
-    );
-});
-
 //dresscode panel slide
 jQuery(function( $ ){
   var container = $( ".open-dresscode-panel" );
-  $( ".open-dresscode").click(
+  $( ".open-dresscode, .close-dresscode").click(
     function( event ){
       event.preventDefault();
       if (container.is( ":visible" )){
         container.slideUp( 1000 );
         $(this).removeClass("active");
+        $(".open-dresscode").removeClass("active");
+        $('html, body').animate({scrollTop:$('.open-dresscode').offset().top-150}, {duration:800, queue:false});
       } else {
         container.slideDown( 1000 );
         $(this).addClass("active");
@@ -244,20 +136,30 @@ jQuery(function( $ ){
     );
 });
 
+
+
+
+//open artists
 jQuery(function( $ ){
-  var container = $( ".open-dresscode-panel" );
-  $( ".close-dresscode").click(
-    function( event ){
-      event.preventDefault();
-      if (container.is( ":visible" )){
-        container.slideUp( 1000 );
-        $(".open-dresscode").removeClass("active");
-      } else {
-        container.slideDown( 1000 );
-      }
-    }
-    );
+  var artists = $('.artist-wrapper');
+  $('.artist-wrapper').each(function(i,o){
+    var $o = $(o);
+    $o.children('h5').click(      
+      function( event ){
+        event.preventDefault();
+        if($o.hasClass('active')){
+          $('.artist-wrapper').removeClass('active')
+          $('.artist-wrapper > div').slideUp( 1000 );        
+        } else {
+          $('.artist-wrapper').removeClass('active')
+          $('.artist-wrapper > div').slideUp( 1000 );          
+          $o.addClass('active');
+          $o.children('div').slideDown( 1000 );          
+        }      
+    });  
+  });
 });
+
 
 //footer scroll to top
 $("a[href='#top']").click(function() {
@@ -287,223 +189,92 @@ $(document).ready( function() {
 
 //use mobile
 //use desk gallery
-////desk owl carousel
-/////first slide
+///// Archive Gallery (owl carousel)
 $(document).ready(function() {
-  var owl = $(".desk-gallery-f1");
-  var status = $(".owlStatus");
+  var owl = $(".archive-gallery-the");
+  //var status = $(".owlStatus");
   owl.owlCarousel({
     singleItem:true,
-autoPlay: 3000, //Set AutoPlay to 3 seconds
-pagination : false,
-navigation : true,
-navigationText : [ "<i class='fa fa-angle-left'></i>",
-"<i class='fa fa-angle-right'></i>"],
-rewindNav : true,
-responsive: true,
-responsiveRefreshRate : 300,
-responsiveBaseWidth: window,
-autoPlay: false,
-lazyLoad: true,
-afterAction : afterAction
+    autoPlay: 3000, //Set AutoPlay to 3 seconds
+    pagination : false,
+    navigation : true,
+    navigationText : [ "<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+    rewindNav : true,
+    responsive: true,
+    responsiveRefreshRate : 300,
+    responsiveBaseWidth: window,
+    autoPlay: false,
+    lazyLoad: true,
+    afterAction : afterAction
 });
-  function updateResult(pos,value){
-    status.find(pos).find(".result").text(value);
+  function updateResult(pos,value, $contex){
+    $(".owlStatus", $contex).find(pos).find(".result").text(value);
   }
-  function afterAction(){
-    updateResult(".owlItems", this.owl.owlItems.length);
-    updateResult(".currentItem", this.owl.currentItem);
+  function afterAction(a){
+    var $contex = $(a).parents('.desk-gallery-wrapper');
+    updateResult(".owlItems", this.owl.owlItems.length, $contex);
+    updateResult(".currentItem", this.owl.currentItem, $contex);
   }
 });
-////// close is global
-//close 
+////// galley close button ( global )
 jQuery(function( $ ){
   var container = $( ".desk-gallery-wrapper"  );
   $( ".close").click(
     function( event ){
-      event.preventDefault();
-      if (container.is( ":visible" )){
-        container.slideUp( 1000 );
-      } else {
-        container.slideDown( 1000 );
-      }
+      $('.desk-thumb-wrapper > div').removeClass('active');
+      $('.desk-gallery-wrapper').removeClass('active'); 
     }
     );
 });
-//////open 1st slide on click
-jQuery(function( $ ){
-  var container = $( ".desk-gallery-wrapper" );
-  $( ".desk-thumb1").click(
-    function( event ){
+////// gallery open/close on thumbs
+jQuery(function( $ ){  
+  $( ".desk-thumb-wrapper a").click(function( event ){
       event.preventDefault();
-      if (container.is( ":visible" )){
-        container.slideUp( 1000 );
-        $(".desk-gallery-f1").hide();
-        $(".desk-gallery-f2").hide();
-        $(".desk-gallery-f3").hide();
-        $(".desk-gallery-f4").hide();
+      var $evSrc = $(this);
+      var $activeThumb = $evSrc.parents('.desk-thumb-wrapper > div');
+      var $thmbs = $('.desk-thumb-wrapper > div');
+      var $galleryWrapperThe = $($(this).attr('href'));
+      var $galleryWrappers = $('.desk-gallery-wrapper');
+      if($evSrc.parent('.active').length > 0){  
+        $thmbs.removeClass('active');
+        $galleryWrappers.removeClass('active');      
+        return false;
       } else {
-        container.slideDown( 1000 );
-        $(".desk-gallery-f1").show();
-        $(".desk-gallery-f2").hide();
-        $(".desk-gallery-f3").hide();
-        $(".desk-gallery-f4").hide();
+        $thmbs.removeClass('active');
+        $galleryWrappers.removeClass('active');        
+        $activeThumb.addClass('active');
+        $galleryWrapperThe.addClass('active');
         return false;
       }
+  });
+  $('.desk-gallery-wrapper').bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(e){
+    if($('.desk-gallery-wrapper.active').length > 0){
+      $('html, body').animate({scrollTop:$('.desk-gallery-wrapper.active').offset().top}, {duration:800, queue:false}); 
     }
-    );
+  });   
+});
+////// gallery media reordering 
+jQuery(function( $ ){
+  var $galleryes = $('.desk-gallery-wrapper');
+  var timeout;  
+  var reorder = function(){
+    if(Foundation.utils.is_small_only()){
+      $galleryes.each(function(i,o){
+       $('.desk-thumb-wrapper .desk-thumb').eq(i).after($(o));
+      });
+    } else {
+      $('#gallery-box-desk').append($galleryes);
+    }      
+  }
+  reorder();
+  $(window).resize(function(){
+    clearTimeout(timeout);
+    timeout = setTimeout(function(){
+      reorder();
+    }, 250);  
+  });  
 });
 
-/////second slide
-$(document).ready(function() {
-  var owl = $(".desk-gallery-f2");
-  var status = $(".owlStatus");
-  owl.owlCarousel({
-    singleItem:true,
-autoPlay: 3000, //Set AutoPlay to 3 seconds
-pagination : false,
-navigation : true,
-navigationText : [ "<i class='fa fa-angle-left'></i>",
-"<i class='fa fa-angle-right'></i>"],
-rewindNav : true,
-responsive: true,
-responsiveRefreshRate : 300,
-responsiveBaseWidth: window,
-autoPlay: false,
-lazyLoad: true,
-afterAction : afterAction
-});
-  function updateResult(pos,value){
-    status.find(pos).find(".result").text(value);
-  }
-  function afterAction(){
-    updateResult(".owlItems", this.owl.owlItems.length);
-    updateResult(".currentItem", this.owl.currentItem);
-  }
-});
-//////open close 2st slide on click
-jQuery(function( $ ){
-  var container = $( ".desk-gallery-wrapper" );
-  $( ".desk-thumb2").click(
-    function( event ){
-      event.preventDefault();
-      if (container.is( ":visible" )){
-        container.slideUp( 1000 );
-        $(".desk-gallery-f1").hide();
-        $(".desk-gallery-f2").hide();
-        $(".desk-gallery-f3").hide();
-        $(".desk-gallery-f4").hide();
-      } else {
-        container.slideDown( 1000 );
-        $(".desk-gallery-f1").hide();
-        $(".desk-gallery-f2").show();
-        $(".desk-gallery-f3").hide();
-        $(".desk-gallery-f4").hide();
-        return false;
-      }
-    }
-    );
-});
-/////third slide
-$(document).ready(function() {
-  var owl = $(".desk-gallery-f3");
-  var status = $(".owlStatus");
-  owl.owlCarousel({
-    singleItem:true,
-autoPlay: 3000, //Set AutoPlay to 3 seconds
-pagination : false,
-navigation : true,
-navigationText : [ "<i class='fa fa-angle-left'></i>",
-"<i class='fa fa-angle-right'></i>"],
-rewindNav : true,
-responsive: true,
-responsiveRefreshRate : 300,
-responsiveBaseWidth: window,
-autoPlay: false,
-lazyLoad: true,
-afterAction : afterAction
-});
-  function updateResult(pos,value){
-    status.find(pos).find(".result").text(value);
-  }
-  function afterAction(){
-    updateResult(".owlItems", this.owl.owlItems.length);
-    updateResult(".currentItem", this.owl.currentItem);
-  }
-});
-//////open close 3st slide on click
-jQuery(function( $ ){
-  var container = $( ".desk-gallery-wrapper" );
-  $( ".desk-thumb3").click(
-    function( event ){
-      event.preventDefault();
-      if (container.is( ":visible" )){
-        container.slideUp( 1000 );
-        $(".desk-gallery-f1").hide();
-        $(".desk-gallery-f2").hide();
-        $(".desk-gallery-f3").hide();
-        $(".desk-gallery-f4").hide();
-      } else {
-        container.slideDown( 1000 );
-        $(".desk-gallery-f1").hide();
-        $(".desk-gallery-f2").hide();
-        $(".desk-gallery-f3").show();
-        $(".desk-gallery-f4").hide();
-        return false;
-      }
-    }
-    );
-});
-/////forth slide
-$(document).ready(function() {
-  var owl = $(".desk-gallery-f4");
-  var status = $(".owlStatus");
-  owl.owlCarousel({
-    singleItem:true,
-autoPlay: 3000, //Set AutoPlay to 3 seconds
-pagination : false,
-navigation : true,
-navigationText : [ "<i class='fa fa-angle-left'></i>",
-"<i class='fa fa-angle-right'></i>"],
-rewindNav : true,
-responsive: true,
-responsiveRefreshRate : 300,
-responsiveBaseWidth: window,
-autoPlay: false,
-lazyLoad: true,
-afterAction : afterAction
-});
-  function updateResult(pos,value){
-    status.find(pos).find(".result").text(value);
-  }
-  function afterAction(){
-    updateResult(".owlItems", this.owl.owlItems.length);
-    updateResult(".currentItem", this.owl.currentItem);
-  }
-});
-//////open close 4st slide on click
-jQuery(function( $ ){
-  var container = $( ".desk-gallery-wrapper" );
-  $( ".desk-thumb4").click(
-    function( event ){
-      event.preventDefault();
-      if (container.is( ":visible" )){
-        container.slideUp( 1000 );
-        $(".desk-gallery-f1").hide();
-        $(".desk-gallery-f2").hide();
-        $(".desk-gallery-f3").hide();
-        $(".desk-gallery-f4").hide();
-      } else {
-        container.slideDown( 1000 );
-        $(".desk-gallery-f1").hide();
-        $(".desk-gallery-f2").hide();
-        $(".desk-gallery-f3").hide();
-        $(".desk-gallery-f4").show();
-        return false;
-      }
-    }
-    );
-});
 
 //paralex
 $(document).ready(function(){

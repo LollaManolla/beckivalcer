@@ -718,15 +718,15 @@ a.more.close-dresscode {
     }
   }
   .owl-theme .owl-controls {
-    .owl-buttons div{
-  color: $white;
-  display: inline-block;
-  zoom: 1;
-  margin: 5px;
-  padding: 3px 10px;
-  font-size: rem-calc(30);
-  background: $black;
-}
+  .owl-buttons div{
+    color: $white;
+    display: inline-block;
+    zoom: 1;
+    margin: 5px;
+    padding: 3px 10px;
+    font-size: rem-calc(30);
+    background: $black;
+  }
     width: 100%;
     margin-top: 10px;
     text-align: center;
@@ -742,12 +742,12 @@ a.more.close-dresscode {
     }
   }
   
-.owl-item .item img {
+  .owl-item .item img {
     display: block;
     height: auto;
     text-align: center;
     margin: 0 auto;
-    }
+  }
 
 
   //desk gallery
@@ -760,22 +760,22 @@ a.more.close-dresscode {
   .desk-thumb3,
   .desk-thumb4 {
     @include grid-column(3, $collapse: true);
-    @media #{$small-only} {width:50%;}
+    @media #{$small-only} {width:100%;}
     a {
       display: block;
       position: relative;
       background-color: $black;
       img {
-          -webkit-transition: all 1s ease;
-     -moz-transition: all 1s ease;
-       -o-transition: all 1s ease;
-      -ms-transition: all 1s ease;
-          transition: all 1s ease;
-
-          &:hover {
-            opacity: 0.6;
-          }
+        -webkit-transition: all .5s ease;
+        -moz-transition: all .5s ease;
+        -o-transition: all .5s ease;
+        -ms-transition: all .5s ease;
+        transition: all .5s ease;
       }
+    }
+    &.active a img,
+    & a:hover img {
+          opacity: 0.6;
     }
     h2 {
       position: absolute;
@@ -805,10 +805,30 @@ a.more.close-dresscode {
       @media #{$small-only} {display: none;}
     }
   }
+  .archive-gallery-the {
+    //position: relative;
+    //display: none;
+    //background-color: $black;
+    //clear: both;
+  }
   .desk-gallery-wrapper {
     position: relative;
-    display: none;
-   background-color: $black;
+    max-height: 0.0001px;
+    background-color: $black;
+    clear: both;
+    overflow: hidden;
+    -webkit-transition: all 2s ease;
+    -moz-transition: all 2s ease;
+    -o-transition: all 2s ease;
+    -ms-transition: all 2s ease;
+    transition: all 2s ease;
+    @media #{$small-up} {
+      //clear: none;        
+    }
+  }
+  
+  .desk-gallery-wrapper.active {
+    max-height: 3000px;
   }
 }
 //section contact
